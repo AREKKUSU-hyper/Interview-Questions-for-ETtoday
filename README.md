@@ -1,9 +1,10 @@
 # ETtoday Interview Questions (the department of Big Data and Analytics)
-my Answers for Interview Questions 2020.03 (two SQL questions and one DataViz question)
+my Answers for Interview Questions in 2020.03 (two SQL questions and one DataViz question)
 
 -- 1st question  
-請設計 SQL，使用左邊的兩個table 計算出每個 tag 與 score 的不重複 cookie 人數，需顯示無資料的人數
-(註：tag_score有3種tag ，tag_index_mapping有5種tag) 並用 index, tag, score 做升冪排序，產出結果如 sheet: Expected Outcome 之 A：D 欄  
+請設計 SQL，使用左邊的兩個table 計算出每個 tag 與 score 的不重複 cookie 人數，  
+需顯示無資料的人數(註：tag_score有3種tag ，tag_index_mapping有5種tag)   
+並用 index, tag, score 做升冪排序，產出結果如 sheet: Expected Outcome 之 A：D 欄  
   
 SELECT ti.idx AS "index", ti.tag AS "tag", ts.score AS "score", COUNT(DISTINCT cookie_id) AS "cookie_times"  
 FROM tag_index_mapping ti  
@@ -24,8 +25,10 @@ FROM tag_index_mapping ti
 LEFT JOIN tag_score ts  
 ON ti.tag = ts.tag  
 GROUP BY ti.tag  
-)  
-SELECT ti.idx AS "index", ti.tag AS "tag", ts.score AS "score", COUNT(DISTINCT ts.cookie_id) AS "cookie_times",  
+) 
+  
+SELECT ti.idx AS "index", ti.tag AS "tag", ts.score AS "score",  
+COUNT(DISTINCT ts.cookie_id) AS "cookie_times",  
 (printf("%.2f",  COUNT(DISTINCT ts.cookie_id)* 100.00/sub.sub_cookie) || '%') AS "cookie_percentage"  
   
 FROM tag_index_mapping ti  
